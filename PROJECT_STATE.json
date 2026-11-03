@@ -3,38 +3,53 @@
   "project": "medical-agent",
   "project_goal": "Build an evaluable, safe, engineering-grade Dermatology Clinical Intelligence Platform.",
   "status": "ACTIVE",
-  "current_phase": "execution-watchdog-bootstrap",
-  "current_task": "Implement project execution monitoring and recovery foundation",
-  "task_status": "RUNNING",
+  "current_phase": "ontology-engineering",
+  "current_task": "Validate Dermatology Ontology V0.1.1 schema and prepare the 100-case annotation trial",
+  "task_status": "WAITING_FOR_EXECUTOR",
   "heartbeat_at": null,
-  "last_progress_at": null,
-  "last_tool_call_at": null,
+  "last_progress_at": "2026-11-03T09:23:00+08:00",
+  "last_tool_call_at": "2026-11-03T09:23:00+08:00",
   "last_error": null,
   "retry_count": 0,
   "recovery_attempts": 0,
-  "blocked_reason": null,
+  "blocked_reason": "A persistent external execution runner has not yet been connected; repository monitoring is installed, but the runner that can autonomously resume engineering tasks is still required.",
   "human_intervention_required": false,
   "completed_tasks": [
     "GitHub repository visibility and permissions verified",
-    "GitHub read/write/commit/read-back test passed"
+    "GitHub read/write/commit/read-back test passed",
+    "10-minute watchdog state model implemented",
+    "Stall detection implemented",
+    "Scheduled GitHub Actions watchdog added",
+    "Dermatology Ontology V0.1.1 machine-readable schema added"
   ],
   "active_tasks": [
-    "Implement watchdog state model",
-    "Implement stall detection",
-    "Implement recovery decision framework",
-    "Add scheduled monitoring workflow"
+    "Validate ontology schema",
+    "Prepare synthetic 100-case annotation dataset",
+    "Define expert annotation agreement analysis",
+    "Integrate record structuring and missing-information agents"
   ],
-  "next_task": "Validate watchdog locally and then continue engineering implementation",
+  "next_task": "Run schema validation and build the 100-case annotation trial package",
   "artifacts": [
     ".github/github-connection-test.md",
-    "PROJECT_STATE.json"
+    ".github/workflows/project-watchdog.yml",
+    "PROJECT_STATE.json",
+    "scripts/watchdog.py",
+    "ontology/dermatology_ontology.schema.json",
+    "ontology/README.md"
   ],
-  "test_results": [],
+  "test_results": [
+    {
+      "test": "GitHub read/write/commit/read-back",
+      "status": "PASS",
+      "commit": "c37316732a6f1726e4a9454b5a9efcb463bee0f1"
+    }
+  ],
   "benchmark_results": [],
   "architecture_decisions": [
     "10-minute monitoring is a watchdog mechanism, not a forced 10-minute iteration cycle.",
     "RUNNING must be distinguished from actual progress using heartbeat and last_progress timestamps.",
     "WAITING_FOR_HUMAN is not considered a failure or stall.",
-    "Automatic recovery must not cross the boundary into high-risk external actions or medical decisions without human approval."
+    "Automatic recovery must not cross the boundary into high-risk external actions or medical decisions without human approval.",
+    "The watchdog monitors execution continuity; the execution/recovery runner is a separate component."
   ]
 }
