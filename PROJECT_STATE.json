@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "project": "medical-agent",
   "project_goal": "Build an evaluable, safe, engineering-grade Dermatology Clinical Intelligence Platform.",
   "status": "ACTIVE",
@@ -12,7 +12,7 @@
   "last_error": null,
   "retry_count": 0,
   "recovery_attempts": 0,
-  "blocked_reason": "A persistent external execution runner has not yet been connected; repository monitoring is installed, but the runner that can autonomously resume engineering tasks is still required.",
+  "blocked_reason": "The persistent execution architecture is now implemented, but a live self-hosted runner and its authorized AGENT_COMMAND have not yet been connected. ChatGPT conversation execution cannot remain alive after a response ends, so this external runtime is required for true long-running autonomous execution.",
   "human_intervention_required": false,
   "completed_tasks": [
     "GitHub repository visibility and permissions verified",
@@ -20,6 +20,8 @@
     "10-minute watchdog state model implemented",
     "Stall detection implemented",
     "Scheduled GitHub Actions watchdog added",
+    "Persistent execution runner contract implemented",
+    "Self-hosted persistent executor workflow implemented",
     "Dermatology Ontology V0.1.1 machine-readable schema added"
   ],
   "active_tasks": [
@@ -28,12 +30,15 @@
     "Define expert annotation agreement analysis",
     "Integrate record structuring and missing-information agents"
   ],
-  "next_task": "Run schema validation and build the 100-case annotation trial package",
+  "next_task": "Connect the self-hosted runner and execute the first autonomous engineering checkpoint; then continue ontology validation and the 100-case annotation trial without waiting for a new chat turn.",
   "artifacts": [
     ".github/github-connection-test.md",
     ".github/workflows/project-watchdog.yml",
+    ".github/workflows/project-executor.yml",
     "PROJECT_STATE.json",
+    "RUNNER_SETUP.md",
     "scripts/watchdog.py",
+    "scripts/execution_runner.py",
     "ontology/dermatology_ontology.schema.json",
     "ontology/README.md"
   ],
@@ -50,6 +55,7 @@
     "RUNNING must be distinguished from actual progress using heartbeat and last_progress timestamps.",
     "WAITING_FOR_HUMAN is not considered a failure or stall.",
     "Automatic recovery must not cross the boundary into high-risk external actions or medical decisions without human approval.",
-    "The watchdog monitors execution continuity; the execution/recovery runner is a separate component."
+    "The watchdog monitors execution continuity; the execution/recovery runner is a separate component.",
+    "Long-running autonomy must be hosted outside the ChatGPT response lifecycle; the repository now contains the persistent runner contract and self-hosted execution workflow."
   ]
 }
