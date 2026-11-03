@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/medical-agent/dermatology-ontology/v0.1.1",
+  "title": "Dermatology Clinical Ontology Case Schema",
+  "type": "object",
+  "required": ["case_id", "clinical_facts", "diagnoses"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "clinical_facts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/clinicalFact"}
+    },
+    "patterns": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/pattern"}
+    },
+    "diagnoses": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/diagnosisAssessment"}
+    }
+  },
+  "$defs": {
+    "clinicalFact": {
+      "type": "object",
+      "required": ["fact_id", "domain", "status", "certainty", "source_type"],
+      "properties": {
+        "fact_id": {"type": "string"},
+        "domain": {"type": "string"},
+        "concept_id": {"type": "string"},
+        "value": {},
+        "status": {"enum": ["PRESENT", "ABSENT", "UNKNOWN", "NOT_DOCUMENTED", "UNCERTAIN"]},
+        "certainty": {"enum": ["CONFIRMED", "PROBABLE", "POSSIBLE", "UNCERTAIN", "REFUTED", "UNKNOWN"]},
+        "temporality": {"enum": ["CURRENT", "HISTORICAL", "FUTURE", "RECURRENT", "UNKNOWN"]},
+        "source_type": {"enum": ["PATIENT_REPORT", "CAREGIVER_REPORT", "CLINICIAN_OBSERVATION", "CLINICIAN_ASSESSMENT", "OBJECTIVE_TEST", "PATHOLOGY", "LABORATORY", "IMAGING", "HISTORICAL_RECORD", "AI_INFERENCE", "UNKNOWN"]},
+        "source_ref": {"type": "string"},
+        "provenance": {"type": "object", "additionalProperties": true}
+      }
+    },
+    "pattern": {
+      "type": "object",
+      "required": ["pattern_id", "name"],
+      "properties": {
+        "pattern_id": {"type": "string"},
+        "name": {"type": "string"},
+        "supporting_facts": {"type": "array", "items": {"type": "string"}},
+        "certainty": {"enum": ["CONFIRMED", "PROBABLE", "POSSIBLE", "UNCERTAIN", "REFUTED", "UNKNOWN"]}
+      }
+    },
+    "diagnosisAssessment": {
+      "type": "object",
+      "required": ["diagnosis_id", "concept_id", "status", "rank", "certainty"],
+      "properties": {
+        "diagnosis_id": {"type": "string"},
+        "concept_id": {"type": "string"},
+        "status": {"enum": ["DIFFERENTIAL", "WORKING", "CONFIRMED", "RULED_OUT"]},
+        "rank": {"type": "integer", "minimum": 1},
+        "certainty": {"enum": ["CONFIRMED", "PROBABLE", "POSSIBLE", "UNCERTAIN", "REFUTED", "UNKNOWN"]},
+        "supporting_facts": {"type": "array", "items": {"type": "string"}},
+        "contradicting_facts": {"type": "array", "items": {"type": "string"}},
+        "missing_information": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
