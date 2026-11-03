@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1.0",
+  "project": "medical-agent",
+  "project_goal": "Build an evaluable, safe, engineering-grade Dermatology Clinical Intelligence Platform.",
+  "status": "ACTIVE",
+  "current_phase": "execution-watchdog-bootstrap",
+  "current_task": "Implement project execution monitoring and recovery foundation",
+  "task_status": "RUNNING",
+  "heartbeat_at": null,
+  "last_progress_at": null,
+  "last_tool_call_at": null,
+  "last_error": null,
+  "retry_count": 0,
+  "recovery_attempts": 0,
+  "blocked_reason": null,
+  "human_intervention_required": false,
+  "completed_tasks": [
+    "GitHub repository visibility and permissions verified",
+    "GitHub read/write/commit/read-back test passed"
+  ],
+  "active_tasks": [
+    "Implement watchdog state model",
+    "Implement stall detection",
+    "Implement recovery decision framework",
+    "Add scheduled monitoring workflow"
+  ],
+  "next_task": "Validate watchdog locally and then continue engineering implementation",
+  "artifacts": [
+    ".github/github-connection-test.md",
+    "PROJECT_STATE.json"
+  ],
+  "test_results": [],
+  "benchmark_results": [],
+  "architecture_decisions": [
+    "10-minute monitoring is a watchdog mechanism, not a forced 10-minute iteration cycle.",
+    "RUNNING must be distinguished from actual progress using heartbeat and last_progress timestamps.",
+    "WAITING_FOR_HUMAN is not considered a failure or stall.",
+    "Automatic recovery must not cross the boundary into high-risk external actions or medical decisions without human approval."
+  ]
+}
