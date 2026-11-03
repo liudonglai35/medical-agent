@@ -1,0 +1,40 @@
+name: Medical Agent Project Watchdog
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions scheduled workflows use a minimum practical cadence of 5 minutes.
+    # The watchdog itself is configured for a 10-minute project monitoring policy.
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run execution watchdog
+        id: watchdog
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/watchdog.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit "$code"
+
+      - name: Report recovery condition
+        if: steps.watchdog.outputs.exit_code == '10'
+        run: |
+          echo "A recovery condition was detected. A configured execution/recovery runner is required to resume the project task."
+          echo "This workflow intentionally does not invent or perform privileged recovery actions."
+
+      - name: Report state review condition
+        if: steps.watchdog.outputs.exit_code == '11'
+        run: |
+          echo "The project state contains an unrecognized task status and requires review."
