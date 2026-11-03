@@ -1,18 +1,18 @@
 {
-  "schema_version": "0.2.0",
+  "schema_version": "0.3.0",
   "project": "medical-agent",
   "project_goal": "Build an evaluable, safe, engineering-grade Dermatology Clinical Intelligence Platform.",
   "status": "ACTIVE",
   "current_phase": "ontology-engineering",
-  "current_task": "Validate Dermatology Ontology V0.1.1 schema and prepare the 100-case annotation trial",
+  "current_task": "Verify ontology CI and complete the 100-case annotation trial package; then integrate Clinical Record Agent",
   "task_status": "WAITING_FOR_EXECUTOR",
   "heartbeat_at": null,
-  "last_progress_at": "2026-11-03T09:23:00+08:00",
-  "last_tool_call_at": "2026-11-03T09:23:00+08:00",
+  "last_progress_at": "2026-11-03T23:32:48+08:00",
+  "last_tool_call_at": "2026-11-03T23:32:48+08:00",
   "last_error": null,
   "retry_count": 0,
   "recovery_attempts": 0,
-  "blocked_reason": "The persistent execution architecture is now implemented, but a live self-hosted runner and its authorized AGENT_COMMAND have not yet been connected. ChatGPT conversation execution cannot remain alive after a response ends, so this external runtime is required for true long-running autonomous execution.",
+  "blocked_reason": "The repository engineering work can continue through the connected GitHub interface, but true long-running autonomous execution still requires a live self-hosted runner plus an authorized AGENT_COMMAND.",
   "human_intervention_required": false,
   "completed_tasks": [
     "GitHub repository visibility and permissions verified",
@@ -22,31 +22,48 @@
     "Scheduled GitHub Actions watchdog added",
     "Persistent execution runner contract implemented",
     "Self-hosted persistent executor workflow implemented",
-    "Dermatology Ontology V0.1.1 machine-readable schema added"
+    "Dermatology Ontology V0.1.1 machine-readable schema added",
+    "Deterministic synthetic dermatology case factory implemented",
+    "100-case ontology annotation trial protocol documented",
+    "Ontology schema/safety regression tests implemented",
+    "Automated ontology validation workflow added",
+    "Synthetic-data clinical-performance boundary documented"
   ],
   "active_tasks": [
-    "Validate ontology schema",
-    "Prepare synthetic 100-case annotation dataset",
-    "Define expert annotation agreement analysis",
-    "Integrate record structuring and missing-information agents"
+    "Verify ontology validation workflow result",
+    "Run/inspect 100-case annotation trial and agreement analysis",
+    "Freeze ontology V0.1.2 changes only where gaps are demonstrated",
+    "Integrate Clinical Record Agent",
+    "Integrate Missing Information Agent"
   ],
-  "next_task": "Connect the self-hosted runner and execute the first autonomous engineering checkpoint; then continue ontology validation and the 100-case annotation trial without waiting for a new chat turn.",
+  "next_task": "Verify the ontology CI run; if green, freeze the V0.1.1 validation checkpoint and implement the Clinical Record Agent input/output contract and regression fixtures. If CI fails, diagnose and fix before advancing.",
   "artifacts": [
     ".github/github-connection-test.md",
     ".github/workflows/project-watchdog.yml",
     ".github/workflows/project-executor.yml",
+    ".github/workflows/ontology-validation.yml",
     "PROJECT_STATE.json",
     "RUNNER_SETUP.md",
     "scripts/watchdog.py",
     "scripts/execution_runner.py",
+    "scripts/generate_synthetic_cases.py",
     "ontology/dermatology_ontology.schema.json",
-    "ontology/README.md"
+    "ontology/README.md",
+    "ontology/ANNOTATION_TRIAL.md",
+    "data/synthetic/README.md",
+    "tests/test_ontology_schema.py",
+    "requirements-dev.txt"
   ],
   "test_results": [
     {
       "test": "GitHub read/write/commit/read-back",
       "status": "PASS",
       "commit": "c37316732a6f1726e4a9454b5a9efcb463bee0f1"
+    },
+    {
+      "test": "Ontology validation test implementation",
+      "status": "ADDED_NOT_YET_CI_VERIFIED",
+      "scope": "JSON Schema Draft 2020-12 validation, 100-case generation, ABSENT vs NOT_DOCUMENTED, provenance, and no-AI-inference fixture checks"
     }
   ],
   "benchmark_results": [],
@@ -56,6 +73,7 @@
     "WAITING_FOR_HUMAN is not considered a failure or stall.",
     "Automatic recovery must not cross the boundary into high-risk external actions or medical decisions without human approval.",
     "The watchdog monitors execution continuity; the execution/recovery runner is a separate component.",
-    "Long-running autonomy must be hosted outside the ChatGPT response lifecycle; the repository now contains the persistent runner contract and self-hosted execution workflow."
+    "Long-running autonomy must be hosted outside the ChatGPT response lifecycle; the repository contains the persistent runner contract and self-hosted execution workflow, but the live runner is not connected.",
+    "Synthetic data is an engineering fixture only and cannot support claims about real-world clinical performance."
   ]
 }
